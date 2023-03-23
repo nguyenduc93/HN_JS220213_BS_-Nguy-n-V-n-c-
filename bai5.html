@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 5</title>
+  </head>
+  <h2>Quản lí nhân viên</h2>
+  <label for="">Tên Nhân Viên</label>
+  <input type="text" id="input" />
+  <button onclick="save()">save</button>
+  <h3>Thông tin nhân viên</h3>
+  <table id="table"></table>
+  <body>
+    <script>
+      let list = ["Nguyễn Hữu Minh Dương", "Nguyễn Thành Nam", "Phan Thị Cẩm Vân"];
+      function save() {
+        let name = document.getElementById("input").value;
+        list.push(name);
+        renderName();
+      }
+      function renderName() {
+        let result = `
+            <tr>
+              <td>Tên Nhân viên</td>
+            </tr>
+        `;
+        for (let i = 0; i < list.length; i++) {
+          result += `
+            <tr>
+                <td>
+                    ${list[i]}
+                </td>
+                <td><button onclick="editName(${i})">Edit</button></td>
+                <td><button onclick="deleteName(${i})">Delete</button></td>
+            </tr>
+            `;
+        }
+        document.getElementById("table").innerHTML = result;
+      }
+      renderName();
+      function deleteName(id) {
+        list.splice(id, 1);
+        renderName();
+      }
+      function editName(id) {
+        let valueEdit = prompt(`Nhập tên muốn thay thế: `);
+        list.splice(id, 1, valueEdit);
+        renderName();
+      }
+    </script>
+  </body>
+</html>
